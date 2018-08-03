@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch01", "Ch01\Ch01.csproj", "{DD8213EB-FCD2-4C11-B24D-337E8C214E48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch01", "Ch01\Ch01.csproj", "{DD8213EB-FCD2-4C11-B24D-337E8C214E48}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch01Demos", "Ch01Demos", "{35D0D250-8403-4300-AB69-7933EA04C550}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch02Demos", "Ch02Demos", "{E31673F2-DA7A-457B-B164-C220A84CD2F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch02", "Ch02\Ch02.csproj", "{1ED4A6E0-5303-4122-9936-45CC0C65D0F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,17 @@ Global
 		{DD8213EB-FCD2-4C11-B24D-337E8C214E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD8213EB-FCD2-4C11-B24D-337E8C214E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD8213EB-FCD2-4C11-B24D-337E8C214E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED4A6E0-5303-4122-9936-45CC0C65D0F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED4A6E0-5303-4122-9936-45CC0C65D0F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED4A6E0-5303-4122-9936-45CC0C65D0F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED4A6E0-5303-4122-9936-45CC0C65D0F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DD8213EB-FCD2-4C11-B24D-337E8C214E48} = {35D0D250-8403-4300-AB69-7933EA04C550}
+		{1ED4A6E0-5303-4122-9936-45CC0C65D0F4} = {E31673F2-DA7A-457B-B164-C220A84CD2F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FCA1118-6785-41EB-A18F-7F11468AE173}
