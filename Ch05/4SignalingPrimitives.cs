@@ -12,12 +12,12 @@ namespace Ch05
         public static void Main()
         {
             //JoinThreads();
-           // AutoResetEventDemo();
-           // ManualResetEventDemo();
+            // AutoResetEventDemo();
+            // ManualResetEventDemo();
 
             WaitAll();
 
-           // AlgoSolverWaitAny();
+            // AlgoSolverWaitAny();
 
             //SignalAndWait();
 
@@ -26,7 +26,7 @@ namespace Ch05
 
         private static void SignalAndWait()
         {
-           
+
         }
 
         static int findIndex = -1;
@@ -40,7 +40,7 @@ namespace Ch05
               };
             var itemToSearch = 15000;
             var range = Enumerable.Range(1, 100000).ToArray();
-            ThreadPool.QueueUserWorkItem(new WaitCallback(LinearSearch),new {Range = range,ItemToFind = itemToSearch, WaitHandle= waitHandles[0] });
+            ThreadPool.QueueUserWorkItem(new WaitCallback(LinearSearch), new { Range = range, ItemToFind = itemToSearch, WaitHandle = waitHandles[0] });
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(BinarySearch), new { Range = range, ItemToFind = itemToSearch, WaitHandle = waitHandles[1] });
 
@@ -60,11 +60,11 @@ namespace Ch05
 
             Interlocked.CompareExchange(ref findIndex, foundIndex, -1);
             Interlocked.CompareExchange(ref winnerAlgo, "BinarySearch", string.Empty);
-            
+
             autoResetEvent.Set();
         }
 
-        public static void LinearSearch( object state)
+        public static void LinearSearch(object state)
         {
             dynamic data = state;
             int[] x = data.Range;
@@ -87,7 +87,8 @@ namespace Ch05
         private static void ManualResetEventDemo()
         {
             ManualResetEvent manualResetEvent = new ManualResetEvent(false);
-            Task signalOffTask = Task.Factory.StartNew(() => {
+            Task signalOffTask = Task.Factory.StartNew(() =>
+            {
                 while (true)
                 {
                     Thread.Sleep(3000);
@@ -95,7 +96,8 @@ namespace Ch05
                     manualResetEvent.Reset();
                 }
             });
-            Task signalOnTask = Task.Factory.StartNew(() => {
+            Task signalOnTask = Task.Factory.StartNew(() =>
+            {
                 while (true)
                 {
                     Thread.Sleep(5000);
@@ -105,7 +107,8 @@ namespace Ch05
             });
             for (int i = 0; i < 3; i++)
             {
-                Parallel.For(0, 5, (j) => {
+                Parallel.For(0, 5, (j) =>
+                {
                     Console.WriteLine("Task with id {0} waiting for network to be up", Task.CurrentId);
                     manualResetEvent.WaitOne();
                     Console.WriteLine("Task with id {0} making service call", Task.CurrentId);
@@ -122,7 +125,8 @@ namespace Ch05
         private static void AutoResetEventDemo()
         {
             AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-            Task signallingTask = Task.Factory.StartNew(() => {
+            Task signallingTask = Task.Factory.StartNew(() =>
+            {
                 for (int i = 0; i < 10; i++)
                 {
                     Thread.Sleep(1000);
@@ -130,37 +134,45 @@ namespace Ch05
                 }
             });
             int sum = 0;
-            Parallel.For(1, 10, (i) => {
+            Parallel.For(1, 10, (i) =>
+            {
                 Console.WriteLine("Task with id {0} waiting for signal to enter", Task.CurrentId);
                 autoResetEvent.WaitOne();
                 Console.WriteLine("Task with id {0} received signal to enter", Task.CurrentId);
                 sum += i;
             });
         }
-        static int sum = 0;
+        static int _dataFromService1 = 0;
+        static int _dataFromService2 = 0;
         private static void WaitAll()
         {
-            WaitHandle[] waitHandles = new WaitHandle[]
+            List<WaitHandle> waitHandles = new List<WaitHandle>
                {
                     new AutoResetEvent(false),
                     new AutoResetEvent(false)
                };
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback( RandomAdd  ), waitHandles[0]);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(FetchDataFromService1), waitHandles.First());
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback(RandomAdd), waitHandles[1]);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(FetchDataFromService2), waitHandles.Last());
 
-            //Waits for all the threads (waitHandles) to call the .Set() method
-            WaitHandle.WaitAll(waitHandles);
+            //Waits for all the threads (waitHandles) to call the .Set() method 
+            //i.e. wait for data to be returned from both service
+            WaitHandle.WaitAll(waitHandles.ToArray());
 
-            Console.WriteLine("The Sum is {0}", sum);
+            Console.WriteLine($"The Sum is {_dataFromService1 + _dataFromService2}");
         }
-
-        private static void RandomAdd(object state)
+        private static void FetchDataFromService1(object state)
         {
             Thread.Sleep(1000);
-            var random = new Random().Next(1, 1000);
-            Interlocked.Add(ref sum, random);
+            _dataFromService1 = 890;
+            var autoResetEvent = state as AutoResetEvent;
+            autoResetEvent.Set();
+        }
+        private static void FetchDataFromService2(object state)
+        {
+            Thread.Sleep(1000);
+            _dataFromService2 = 3;
             var autoResetEvent = state as AutoResetEvent;
             autoResetEvent.Set();
         }
