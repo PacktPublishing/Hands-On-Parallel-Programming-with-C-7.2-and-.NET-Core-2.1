@@ -9,20 +9,17 @@ namespace Ch09
 {
     internal class _4AsyncPerformance
     {
-        public  static void Main(string[] args)
-        {
-            MainAsyncAsync(args).GetAwaiter().GetResult();
-
-            Console.ReadLine();
-        }
-        public static async Task MainAsyncAsync(string[] args)
+        public  static async Task Main(string[] args)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             await Task.WhenAll(Task1(), Task2(), Task3());
             stopwatch.Stop();
 
             Console.WriteLine($"Total time taken is {stopwatch.ElapsedMilliseconds}");
+
+            Console.ReadLine();
         }
+     
         public static async Task MainAsync(string[] args)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();

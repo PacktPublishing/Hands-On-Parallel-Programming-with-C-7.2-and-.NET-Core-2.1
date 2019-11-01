@@ -9,7 +9,7 @@ namespace Ch09
 {
     class _3AsyncPLinq
     {
-        public static async Task MainAsync(string[] args)
+        public static async Task Main(string[] args)
         {
             //Create 100 dummy urls
             var urls = Enumerable.Repeat("http://www.dummyurl.com", 100);
@@ -27,11 +27,6 @@ namespace Ch09
                 HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
                 string content = await response.Content.ReadAsStringAsync();
             });
-        }
-
-        public static void Main(string[] args)
-        {
-            MainAsync(args).GetAwaiter().GetResult();
 
             Console.ReadKey();
         }

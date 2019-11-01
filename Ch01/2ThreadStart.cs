@@ -3,6 +3,10 @@ namespace Ch01
 {
     class _2ThreadStart
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.WriteLine("Start Execution!!!");

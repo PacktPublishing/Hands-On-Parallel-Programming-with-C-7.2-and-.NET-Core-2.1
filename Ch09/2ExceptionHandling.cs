@@ -41,27 +41,29 @@ namespace Ch09
             Console.ReadLine();
         }
 
-        private async static void Scenario4CallAsyncWithoutAwaitFromOutsideTryCatch()
+        private static async void Scenario4CallAsyncWithoutAwaitFromOutsideTryCatch()
         {
             Task task = DoSomethingFaulty();
             Console.WriteLine("This should not execute");          
         }
 
-        private async static Task Scenario3CallAsyncWithAwaitFromOutsideTryCatch()
+        private static async Task Scenario3CallAsyncWithAwaitFromOutsideTryCatch()
         {
             await DoSomethingFaulty();
             Console.WriteLine("This should not execute");           
         }
-        private async static Task Scenario2CallAsyncWithoutAwaitFromInsideTryCatch()
+        private static async Task Scenario2CallAsyncWithoutAwaitFromInsideTryCatch()
         {
             try
             {
                 var task = DoSomethingFaulty();
                 Console.WriteLine("This should not execute");
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 task.ContinueWith((s) =>
                 {
                     Console.WriteLine(s);
                 });
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
             catch (Exception ex)
             {
@@ -69,17 +71,19 @@ namespace Ch09
                 Console.WriteLine(ex.StackTrace);
             }
         }
-        private async static Task Scenario2AsyncReturningTaskExample()
+        private static async Task Scenario2AsyncReturningTaskExample()
         {
             try
             {
                 Task task = DoSomethingFaulty();
                 Console.WriteLine("This should not execute");
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 task.ContinueWith((s) =>
                 {
                     Console.WriteLine(s);
                 });
-                // Console.WriteLine(data);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                              // Console.WriteLine(data);
             }
             catch (Exception ex)
             {
@@ -87,17 +91,19 @@ namespace Ch09
                 Console.WriteLine(ex.StackTrace);
             }
         }
-        private async static Task Scenario1CallAsyncWithoutAwaitFromOutsideTryCatch()
+        private static async Task Scenario1CallAsyncWithoutAwaitFromOutsideTryCatch()
         {
             Task task = DoSomethingFaulty();
             Console.WriteLine("This should not execute");
             try
             {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 task.ContinueWith((s) =>
                 {
                     Console.WriteLine(s);
                 });
-                // Console.WriteLine(data);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                              // Console.WriteLine(data);
             }
             catch (Exception ex)
             {
@@ -106,7 +112,7 @@ namespace Ch09
             }
         }
 
-        private async static void AsyncReturningValueExample()
+        private static async void AsyncReturningValueExample()
         {
             try
             {

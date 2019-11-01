@@ -12,8 +12,8 @@ namespace Ch03
     {
         public static void Main()
         {
-           // ThreadLocalVariableForEach();
-            ThreadLocalVariableFor();
+           ThreadLocalVariableForEach();
+            //ThreadLocalVariableFor();
             Console.ReadLine();
         }
 

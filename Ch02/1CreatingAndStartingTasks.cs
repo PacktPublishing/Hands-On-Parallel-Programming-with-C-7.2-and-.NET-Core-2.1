@@ -22,7 +22,7 @@ namespace Ch02
             //StaticTaskRunUsingAction();
             //StaticTaskRunUsingDelegate();
 
-            // StaticTaskFromResultUsingLambda();
+             StaticTaskFromResultUsingLambda();
 
             //TaskDelay();
 
@@ -34,7 +34,7 @@ namespace Ch02
             //Task task = Task.FromCanceled(token);
             //Task<int> canceledTask = Task.FromCanceled<int>(token);
 
-            GetResultsFromTasks();
+           // GetResultsFromTasks();
            // TaskYield();
             Console.ReadLine();
         }
@@ -76,6 +76,7 @@ namespace Ch02
         private static void StaticTaskFromResultUsingLambda()
         {
            Task<int> resultTask = Task.FromResult<int>( Sum(10));
+            Console.WriteLine(resultTask.Result);
         }
 
         private static int Sum(int n)

@@ -177,12 +177,19 @@ namespace Ch05
             SemaphoreSlim semaphore = new SemaphoreSlim(3, 3);
             range.AsParallel().AsOrdered().ForAll(i =>
             {
-                semaphore.Wait();
-                Console.WriteLine("Index {0} making service call using Task {1}", i, Task.CurrentId);
-                //Simulate Http call
-                CallService(i);
-                Console.WriteLine("Index {0} releasing semaphore using Task {1}", i, Task.CurrentId);
-                semaphore.Release();
+                try
+                {
+                    semaphore.Wait();
+                    Console.WriteLine("Index {0} making service call using Task {1}", i, Task.CurrentId);
+                    //Simulate Http call
+                    CallService(i);
+                    Console.WriteLine("Index {0} releasing semaphore using Task {1}", i, Task.CurrentId);
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+
             });
         }
 
@@ -206,13 +213,19 @@ namespace Ch05
         {
             for (int i = 0; i < 4; i++)
             {
-                _readerWriterLockSlim.EnterWriteLock();
-                Console.WriteLine("Entered WriteLock on Task {0}", Task.CurrentId);
-                int random = new Random().Next(1, 10);
-                _list.Add(random);
-                Console.WriteLine("Added {0} to list on Task {1}", random, Task.CurrentId);
-                Console.WriteLine("Exiting WriteLock on Task {0}", Task.CurrentId);
-                _readerWriterLockSlim.ExitWriteLock();
+                try
+                {
+                    _readerWriterLockSlim.EnterWriteLock();
+                    Console.WriteLine("Entered WriteLock on Task {0}", Task.CurrentId);
+                    int random = new Random().Next(1, 10);
+                    _list.Add(random);
+                    Console.WriteLine("Added {0} to list on Task {1}", random, Task.CurrentId);
+                    Console.WriteLine("Exiting WriteLock on Task {0}", Task.CurrentId);
+                }
+                finally
+                {
+                    _readerWriterLockSlim.ExitWriteLock();
+                }
                 Thread.Sleep(1000);
             }
         }
@@ -220,12 +233,18 @@ namespace Ch05
         {
             for (int i = 0; i < 2; i++)
             {
-                _readerWriterLockSlim.EnterReadLock();
+                try
+                {
+                    _readerWriterLockSlim.EnterReadLock();
                 Console.WriteLine("Entered ReadLock on Task {0}", Task.CurrentId);
 
                 Console.WriteLine("Items: {0} on Task {1}", _list.Select(j=>j.ToString()).Aggregate((a, b) => a + "," + b), Task.CurrentId);
                 Console.WriteLine("Exiting ReadLock on Task {0}", Task.CurrentId);
-                _readerWriterLockSlim.ExitReadLock();
+                }
+                finally
+                {
+                    _readerWriterLockSlim.ExitWriteLock();
+                }
                 Thread.Sleep(1000);
             }
         }

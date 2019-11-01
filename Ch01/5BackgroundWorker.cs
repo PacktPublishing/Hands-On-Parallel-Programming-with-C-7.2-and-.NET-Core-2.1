@@ -7,6 +7,11 @@ namespace Ch01
 {
     class _5BackgroundWorker
     {
+
+        /// <summary>
+        /// Main method that creates background worker
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             var backgroundWorker = new BackgroundWorker();
@@ -29,6 +34,11 @@ namespace Ch01
             }
         }
 
+        /// <summary>
+        /// This method executes when the background worker finishes execution
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
@@ -38,12 +48,21 @@ namespace Ch01
             else
                 Console.WriteLine("Result from service call is " + e.Result);
         }
-
+        /// <summary>
+        /// This method is called when background worker want to report progress to caller
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             Console.WriteLine("{0}% completed",e.ProgressPercentage);
         }
 
+        /// <summary>
+        /// Service call we are tryign to simulate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void SimulateServiceCall(object sender, DoWorkEventArgs e)
         {
             var worker = sender as BackgroundWorker;
