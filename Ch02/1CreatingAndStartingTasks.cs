@@ -43,16 +43,16 @@ namespace Ch02
         {
             var sumTaskViaTaskOfInt = new Task<int>(()=> Sum(5));
             sumTaskViaTaskOfInt.Start();
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaTaskOfInt.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaTaskOfInt.Result}" );
 
             var sumTaskViaFactory = Task.Factory.StartNew<int>(() => Sum(5));
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaFactory.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaFactory.Result}" );
 
             var sumTaskViaTaskRun = Task.Run<int>(() => Sum(5));
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaTaskRun.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaTaskRun.Result}" );
 
             var sumTaskViaTaskResult = Task.FromResult<int>( Sum(5));
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaTaskResult.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaTaskResult.Result}" );
         }
 
         private async static void TaskYield()

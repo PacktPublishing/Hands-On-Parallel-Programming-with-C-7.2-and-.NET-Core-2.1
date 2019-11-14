@@ -46,7 +46,7 @@ namespace Ch05
                 Thread.Sleep(100);
                 Interlocked.Increment(ref _counter);
             });
-            Console.WriteLine("Value for counter should be 999 and is {0}", _counter);
+            Console.WriteLine($"Value for counter should be 999 and is {_counter}" );
         }
 
         static long _counter;
@@ -58,7 +58,7 @@ namespace Ch05
                 Thread.Sleep(100);
                 _counter++;
             });
-            Console.WriteLine("Value for counter should be 999 and is {0}", _counter);
+            Console.WriteLine($"Value for counter should be 999 and is {_counter}");
         }
     }
 }

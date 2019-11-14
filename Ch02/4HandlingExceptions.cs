@@ -21,7 +21,7 @@ namespace Ch02
             }
             catch (AggregateException ex)
             {
-                Console.WriteLine("Task has finished with exception {0}", ex.InnerException.Message);
+                Console.WriteLine($"Task has finished with exception {ex.InnerException.Message}" );
             }
             Console.ReadLine();
         }

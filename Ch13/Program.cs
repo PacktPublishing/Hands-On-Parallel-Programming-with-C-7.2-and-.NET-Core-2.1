@@ -11,14 +11,14 @@ namespace Ch13
     {
         static void Main(string[] args)
         {
-            //MapReduceTest();
+            MapReduceTest();
             //AggregationTestSimple();
             //AggregationTestParallel();
             //AggregationTestPLinq();
             //AggregationTestConcurrent();
           //  SpeculativeForEachTest();
 
-            LazyDemo();
+            //LazyDemo();
             Console.ReadLine();
         }
 
@@ -164,9 +164,7 @@ namespace Ch13
             // process the results
             foreach (var item in result)
             {
-                Console.WriteLine("{0} came {1} times",
-                item.Key,
-                item.Value);
+                Console.WriteLine($"{item.Key} found {item.Value} times" );
             }
                      
         }

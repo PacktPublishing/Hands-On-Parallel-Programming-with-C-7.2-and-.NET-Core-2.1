@@ -58,7 +58,7 @@ namespace Ch06
                 BlockingCollection<int>.TryTakeFromAny(produceCollections, out item, TimeSpan.FromSeconds(1));
                 if (item != default(int))
                 {
-                    Console.WriteLine("Item fetched is {0}", item);
+                    Console.WriteLine($"Fetched item is {item}");
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Ch06
                 while (!blockingCollection.IsCompleted)
                 {
                     int item = blockingCollection.Take();
-                    Console.WriteLine("Item retrieved is {0}" , item);
+                    Console.WriteLine($"Received item is {item}" );
                 }
             });
 
@@ -120,7 +120,7 @@ namespace Ch06
 
             Task.WaitAll(producerTask1, producerTask2);
 
-            Console.WriteLine("Keys are {0} ", string.Join(",", concurrentDictionary.Keys.Select(c => c.ToString()).ToArray()));
+            Console.WriteLine($"Keys are {string.Join(", ", concurrentDictionary.Keys.Select(c => c.ToString()).ToArray())} " );
         }
 
         static ConcurrentBag<int> concurrentBag = new ConcurrentBag<int>();
@@ -143,7 +143,7 @@ namespace Ch06
                     int item;
                     if (concurrentBag.TryTake(out item))
                     {
-                        Console.WriteLine("Item is {0}", item);
+                        Console.WriteLine($"Item is {item}");
                     }
                 }
             });
@@ -188,7 +188,7 @@ namespace Ch06
             });
 
 
-            Console.WriteLine("Calculated Sum is {0} and should be {1}", sum, Enumerable.Range(0, 500).Sum());
+            Console.WriteLine($"Calculated Sum is {sum} and actual sum should be {Enumerable.Range(0, 500).Sum()}" );
         }
 
         private static void ProducerConsumerUsingQueues()
@@ -214,7 +214,7 @@ namespace Ch06
             });
           
 
-            Console.WriteLine("Calculated Sum is {0} and should be {1}", sum, Enumerable.Range(0, 500).Sum());
+            Console.WriteLine($"Calculated Sum is {sum} and actual sum should be {Enumerable.Range(0, 500).Sum()}");
         }
 
         private static void ProducerConsumerUsingConcurrentQueues()
@@ -240,7 +240,7 @@ namespace Ch06
             });
 
 
-            Console.WriteLine("outerSum = {0}, should be {1}", sum, Enumerable.Range(0, 500).Sum());
+            Console.WriteLine($"outerSum = {sum}, actual sum should be {Enumerable.Range(0, 500).Sum()}");
         }
 
         private static void ProducerConsumerUsingConcurrentStack()
@@ -267,7 +267,7 @@ namespace Ch06
             });
 
 
-            Console.WriteLine("outerSum = {0}, should be 124765", sum);
+            Console.WriteLine($"outerSum = {sum}, and actual sum should be 124765");
         }
     }
 }

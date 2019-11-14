@@ -13,7 +13,7 @@ namespace Ch07
 
             for (int i = 0; i < 10; i++)
             {
-                Task.Factory.StartNew(() => Console.WriteLine("Thread with id {0} has counter value as {1}", Task.CurrentId, counter.Value));
+                Task.Factory.StartNew(() => Console.WriteLine($"Thread with id {Task.CurrentId} has counter value as {counter.Value}" ));
             }
             Console.ReadLine();
         }

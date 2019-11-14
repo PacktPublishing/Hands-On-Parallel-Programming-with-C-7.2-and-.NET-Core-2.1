@@ -24,19 +24,19 @@ namespace Ch04
             IEnumerable<int> parallelRange = ParallelEnumerable.Range(0, 5000).Select(i => i * i);
             foreach (var item in parallelRange)  {        }
             watch.Stop();
-            Console.WriteLine("Time elapsed using ParallelEnumerable : {0}", watch.ElapsedMilliseconds);
+            Console.WriteLine($"Time elapsed using ParallelEnumerable : {watch.ElapsedMilliseconds}" );
 
             Stopwatch watch2 = Stopwatch.StartNew();
             IEnumerable<int> range = Enumerable.Range(0, 5000).Select(i=>i *i);
             foreach (var item in range) { }
             watch2.Stop();
-            Console.WriteLine("Time elapsed using Enumerable : {0}", watch2.ElapsedMilliseconds);
+            Console.WriteLine($"Time elapsed using Enumerable : {watch2.ElapsedMilliseconds}" );
 
             Stopwatch watch3 = Stopwatch.StartNew();
             IEnumerable<int> rangeRepeat = ParallelEnumerable.Repeat(1, 5000);
             foreach (var item in rangeRepeat) { }
             watch3.Stop();
-            Console.WriteLine("Time elapsed using Repeat : {0}", watch3.ElapsedMilliseconds);
+            Console.WriteLine($"Time elapsed using Repeat : {watch3.ElapsedMilliseconds}" );
 
             
             Console.ReadLine();

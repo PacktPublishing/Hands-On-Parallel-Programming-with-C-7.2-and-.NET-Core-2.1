@@ -86,13 +86,13 @@ namespace Ch02
 
             var sumTaskViaTaskOfInt = new Task<int>(() => Sum(5), token);
             sumTaskViaTaskOfInt.Start();
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaTaskOfInt.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaTaskOfInt.Result}" );
 
             var sumTaskViaFactory = Task.Factory.StartNew<int>(() => Sum(5), token);
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaFactory.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaFactory.Result}" );
 
             var sumTaskViaTaskRun = Task.Run<int>(() => Sum(5), token);
-            Console.WriteLine("Result from sumTask is {0}", sumTaskViaTaskRun.Result);
+            Console.WriteLine($"Result from sumTask is {sumTaskViaTaskRun.Result}" );
         }
         private static int Sum(int n)
         {

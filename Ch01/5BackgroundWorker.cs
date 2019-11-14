@@ -46,7 +46,7 @@ namespace Ch01
                 Console.WriteLine(e.Error.Message);
             }
             else
-                Console.WriteLine("Result from service call is " + e.Result);
+                Console.WriteLine($"Result from service call is {e.Result}");
         }
         /// <summary>
         /// This method is called when background worker want to report progress to caller
@@ -55,7 +55,7 @@ namespace Ch01
         /// <param name="e"></param>
         private static void ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Console.WriteLine("{0}% completed",e.ProgressPercentage);
+            Console.WriteLine($"{e.ProgressPercentage}% completed");
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Ch03
             long sumOfNumbers = 0;
 
             Action<long> taskFinishedMethod = (taskResult) => {
-                Console.WriteLine("Sum at the end of all task iterations for task {0} is {1}", Task.CurrentId, taskResult);
+                Console.WriteLine($"Sum at the end of all task iterations for task {Task.CurrentId} is {taskResult}" );
                 Interlocked.Add(ref sumOfNumbers, taskResult);
             };
 
@@ -38,7 +38,7 @@ namespace Ch03
                                      );
 
 
-            Console.WriteLine("The total of 60 numbers is {0}", sumOfNumbers);
+            Console.WriteLine($"The total of 60 numbers is {sumOfNumbers}" );
         }
 
         private static void ThreadLocalVariableForEach()
@@ -47,7 +47,7 @@ namespace Ch03
             long sumOfNumbers = 0;
             
             Action<long> taskFinishedMethod = (taskResult) => {
-                Console.WriteLine("Sum at the end of all task iterations for task {0} is {1}", Task.CurrentId, taskResult);
+                Console.WriteLine($"Sum at the end of all task iterations for task {Task.CurrentId} is {taskResult}" );
                 Interlocked.Add(ref sumOfNumbers, taskResult);
                 };
 
@@ -62,7 +62,7 @@ namespace Ch03
                                      );
          
 
-            Console.WriteLine("The total of 60 numbers is {0}", sumOfNumbers);
+            Console.WriteLine($"The total of 60 numbers is {sumOfNumbers}" );
         }
     }
 }

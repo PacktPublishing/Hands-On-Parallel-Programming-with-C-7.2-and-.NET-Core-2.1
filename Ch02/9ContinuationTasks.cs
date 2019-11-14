@@ -56,7 +56,7 @@ namespace Ch02
                 }).ContinueWith(
                 (e) => {
                     var firstRow = e.Result.Rows[0];
-                    Console.WriteLine("Id is {0} and Name is {0}", firstRow["Id"], firstRow["Name"]);
+                    Console.WriteLine($"Id is {firstRow["Id"]} and Name is {firstRow["Name"]}" );
                     });
            
         }

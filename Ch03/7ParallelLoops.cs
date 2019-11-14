@@ -13,8 +13,8 @@ namespace Ch03
     {
         public static void Main()
         {
-            ParallelFor();
-            //ParallelForEach();
+            //ParallelFor();
+            ParallelForEach();
             Console.ReadLine();
         }
 
@@ -24,7 +24,7 @@ namespace Ch03
             Parallel.ForEach(urls, url =>
             {
                 Ping pinger = new Ping();
-                Console.WriteLine("Ping Url {0} status is {1} by Task {2}",url, pinger.Send(url).Status ,Task.CurrentId);
+                Console.WriteLine($"Ping Url {url} status is {pinger.Send(url).Status} by Task {Task.CurrentId}");
             });
 
 
@@ -40,7 +40,7 @@ namespace Ch03
                      if (fileInfo.CreationTime.Day == DateTime.Now.Day)
                          Interlocked.Increment(ref totalFiles);
                  });
-            Console.WriteLine(totalFiles);
+            Console.WriteLine($"Total number of files in C: drive are {files.Count()} and  {totalFiles} files were created today.");
         }
     }
 }

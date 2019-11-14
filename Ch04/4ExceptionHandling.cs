@@ -25,7 +25,7 @@ namespace Ch04
                 }
                 catch (DivideByZeroException ex)
                 {
-                    Console.WriteLine("Divide by zero exception for {0}", i);
+                    Console.WriteLine($"Divide by zero exception for {i}");
                     return -1;
                 }
             };

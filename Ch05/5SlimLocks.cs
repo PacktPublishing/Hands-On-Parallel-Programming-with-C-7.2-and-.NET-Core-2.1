@@ -31,16 +31,16 @@ namespace Ch05
             bool lockTaken = false;
             try
             {
-                Console.WriteLine("Task {0} Waiting for lock", Task.CurrentId);
+                Console.WriteLine($"Task {Task.CurrentId} Waiting for lock" );
                 _spinLock.Enter(ref lockTaken);
-                Console.WriteLine("Task {0} Updting list", Task.CurrentId);
+                Console.WriteLine($"Task {Task.CurrentId} Updting list");
                 _itemsList.Add(number);
             }
             finally
             {
                 if (lockTaken)
                 {
-                    Console.WriteLine("Task {0} Exiting Update", Task.CurrentId);
+                    Console.WriteLine($"Task {Task.CurrentId} Exiting Update");
                     _spinLock.Exit(false);
                 }
             }
@@ -73,7 +73,7 @@ namespace Ch05
                 while (_serviceName != "Service2")
                     Thread.Sleep(1000);
                 //manualResetEventSlim.Set();
-                Console.WriteLine("All tasks completed for service {0}.", serviceName);
+                Console.WriteLine($"All tasks completed for service {serviceName}." );
                 CloseService(serviceName);
                 HostService(_serviceName);
                 serviceHost2CountdownEvent.Signal();
@@ -82,7 +82,7 @@ namespace Ch05
 
                 finishCountdownEvent.Wait();
                 CloseService(_serviceName);
-                Console.WriteLine("All tasks completed for service {0}.", _serviceName);
+                Console.WriteLine($"All tasks completed for service {_serviceName}." );
             });
             for (int i = 0; i < 5; ++i)
             {
@@ -102,12 +102,12 @@ namespace Ch05
             _serviceName = "Service1";
 
             serviceHost1CountdownEvent.Signal();
-            Console.WriteLine("Task with id {0} signaled countdown event and waiting for service to start", Task.CurrentId);
+            Console.WriteLine($"Task with id {Task.CurrentId} signaled countdown event and waiting for service to start");
 
             //Waiting for service to start
             serviceHost1CountdownEvent.Wait();
           
-            Console.WriteLine("Task with id {0} fetching data from service ", Task.CurrentId);
+            Console.WriteLine($"Task with id {Task.CurrentId} fetching data from service " );
             serviceBarrier.SignalAndWait();
                   
             //change servicename
@@ -116,10 +116,10 @@ namespace Ch05
             //Signal Countdown event
             serviceHost2CountdownEvent.Signal();
            
-            Console.WriteLine("Task with id {0} signaled countdown event and waiting for service to start", Task.CurrentId);
+            Console.WriteLine($"Task with id {Task.CurrentId} signaled countdown event and waiting for service to start");
             serviceHost2CountdownEvent.Wait();
 
-            Console.WriteLine("Task with id {0} fetching data from service ", Task.CurrentId);
+            Console.WriteLine($"Task with id {Task.CurrentId} fetching data from service ");
             serviceBarrier.SignalAndWait();
           
             //Signal Countdown event
@@ -128,12 +128,12 @@ namespace Ch05
 
         private static void CloseService(string name)
         {
-            Console.WriteLine("Service {0} closed", name);
+            Console.WriteLine($"Service {name} closed");
         }
 
         private static void HostService(string name)
         {
-            Console.WriteLine("Service {0} hosted", name);
+            Console.WriteLine($"Service {name} hosted");
         }
 
         private static void ManualResetEventSlimDemo()
@@ -158,9 +158,9 @@ namespace Ch05
             for (int i = 0; i < 3; i++)
             {
                 Parallel.For(0, 5, (j) => {
-                    Console.WriteLine("Task with id {0} waiting for network to be up", Task.CurrentId);
+                    Console.WriteLine($"Task with id {Task.CurrentId} waiting for network to be up");
                     manualResetEvent.Wait();
-                    Console.WriteLine("Task with id {0} making service call", Task.CurrentId);
+                    Console.WriteLine($"Task with id {Task.CurrentId} making service call");
                     DummyServiceCall();
                 });
                 Thread.Sleep(3000);
@@ -180,10 +180,10 @@ namespace Ch05
                 try
                 {
                     semaphore.Wait();
-                    Console.WriteLine("Index {0} making service call using Task {1}", i, Task.CurrentId);
+                    Console.WriteLine("Index {i} making service call using Task {Task.CurrentId}");
                     //Simulate Http call
                     CallService(i);
-                    Console.WriteLine("Index {0} releasing semaphore using Task {1}", i, Task.CurrentId);
+                    Console.WriteLine("Index {i} releasing semaphore using Task {Task.CurrentId}");
                 }
                 finally
                 {
@@ -216,11 +216,11 @@ namespace Ch05
                 try
                 {
                     _readerWriterLockSlim.EnterWriteLock();
-                    Console.WriteLine("Entered WriteLock on Task {0}", Task.CurrentId);
+                    Console.WriteLine($"Entered WriteLock on Task {Task.CurrentId}" );
                     int random = new Random().Next(1, 10);
                     _list.Add(random);
-                    Console.WriteLine("Added {0} to list on Task {1}", random, Task.CurrentId);
-                    Console.WriteLine("Exiting WriteLock on Task {0}", Task.CurrentId);
+                    Console.WriteLine($"Added {random} to list on Task {Task.CurrentId}");
+                    Console.WriteLine($"Exiting WriteLock on Task {Task.CurrentId}");
                 }
                 finally
                 {
@@ -236,10 +236,10 @@ namespace Ch05
                 try
                 {
                     _readerWriterLockSlim.EnterReadLock();
-                Console.WriteLine("Entered ReadLock on Task {0}", Task.CurrentId);
+                Console.WriteLine($"Entered ReadLock on Task {Task.CurrentId}");
 
-                Console.WriteLine("Items: {0} on Task {1}", _list.Select(j=>j.ToString()).Aggregate((a, b) => a + "," + b), Task.CurrentId);
-                Console.WriteLine("Exiting ReadLock on Task {0}", Task.CurrentId);
+                Console.WriteLine($"Items: { _list.Select(j => j.ToString()).Aggregate((a, b) => a + "," + b)} on Task {Task.CurrentId}");
+                Console.WriteLine($"Exiting ReadLock on Task {Task.CurrentId}");
                 }
                 finally
                 {

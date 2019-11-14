@@ -33,11 +33,11 @@ namespace Ch07
 
         static void Initializer()
         {
-            Console.WriteLine("Task with id {0}", Task.CurrentId);
+            Console.WriteLine($"Task with id {Task.CurrentId}");
 
             LazyInitializer.EnsureInitialized(ref _data,ref _initialized, ref _locker, () =>
             {
-                Console.WriteLine("Task with id {0} is Initializing data", Task.CurrentId);
+                Console.WriteLine($"Task with id {Task.CurrentId} is Initializing data");
                 // Returns value that will be assigned in the ref parameter.
                 return new Data();
             });

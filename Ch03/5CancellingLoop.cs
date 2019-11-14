@@ -43,7 +43,7 @@ namespace Ch03
                 lock (locker)
                 {
                     Console.WriteLine(string.Format(
-                   "For i={0} LowestBreakIteration={1} and Task id ={2}", i, parallelLoopState.LowestBreakIteration, Task.CurrentId));
+                   $"For i={i} LowestBreakIteration={parallelLoopState.LowestBreakIteration} and Task id ={Task.CurrentId}"));
                
                 if (i >= 10)
                 {
@@ -73,7 +73,7 @@ namespace Ch03
                 {
                     Thread.Sleep(3000);
                     double result = Math.Sqrt(index);
-                    Console.WriteLine("Index {0}, result {1}", index, result);
+                    Console.WriteLine($"Index {index}, result {result}");
                 });
             }
             catch (OperationCanceledException)
@@ -92,7 +92,7 @@ namespace Ch03
                 
                 if (number == numToFind)
                 {
-                    Console.WriteLine("Calling Break at {0}", number);
+                    Console.WriteLine($"Calling Break at {number}");
                     parallelLoopState.Break();
                 }
 

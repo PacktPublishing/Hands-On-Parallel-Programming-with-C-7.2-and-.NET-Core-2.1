@@ -43,7 +43,7 @@ namespace Ch04
             {
                 Console.WriteLine( $"{item}:{watch.ElapsedMilliseconds}");
             }
-            Console.WriteLine("\nNotBuffered Full Result returned in {0} ms", watch.ElapsedMilliseconds);
+            Console.WriteLine($"\nNotBuffered Full Result returned in {watch.ElapsedMilliseconds} ms" );
             watch.Stop();
         }
 
@@ -61,7 +61,7 @@ namespace Ch04
             {
                 Console.WriteLine($"{item}:{watch.ElapsedMilliseconds}");
             }
-            Console.WriteLine("\nFullyBuffered Full Result returned in {0} ms", watch.ElapsedMilliseconds);
+            Console.WriteLine($"\nFullyBuffered Full Result returned in {watch.ElapsedMilliseconds} ms" );
             watch.Stop();
         }
 
@@ -70,7 +70,7 @@ namespace Ch04
             var range = ParallelEnumerable.Range(1, 100);
             Stopwatch watch = null;
             ParallelQuery<int> query = range
-                 .WithMergeOptions(ParallelMergeOptions.NotBuffered).Where(i => i % 10 == 0).Select(x => {
+                 .WithMergeOptions(ParallelMergeOptions.AutoBuffered).Where(i => i % 10 == 0).Select(x => {
                      Thread.SpinWait(1000);
                     return x;
                 });
@@ -79,7 +79,7 @@ namespace Ch04
             {
                 Console.WriteLine($"{item}:{watch.ElapsedMilliseconds}");
             }
-            Console.WriteLine("\nAutoBuffered Full Result returned in {0} ms", watch.ElapsedMilliseconds);
+            Console.WriteLine($"\nAutoBuffered Full Result returned in {watch.ElapsedMilliseconds} ms" );
             watch.Stop();
         }
     }

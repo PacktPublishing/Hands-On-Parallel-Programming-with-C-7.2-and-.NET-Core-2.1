@@ -20,7 +20,7 @@ namespace Ch03
             var items = Enumerable.Range(1, 20);
             Parallel.ForEach(items, new ParallelOptions { MaxDegreeOfParallelism = 4 }, item =>
            {
-               Console.WriteLine("Index {0} executing on Task Id {1}",item, Task.CurrentId);
+               Console.WriteLine($"Index {item} executing on Task Id {Task.CurrentId}");
            });
         }
 
@@ -28,7 +28,7 @@ namespace Ch03
         {
             Parallel.For(1, 20, new ParallelOptions { MaxDegreeOfParallelism = 4 }, index =>
              {
-                 Console.WriteLine("Index {0} executing on Task Id {1}",index, Task.CurrentId);
+                 Console.WriteLine($"Index {index} executing on Task Id {Task.CurrentId}");
              });
         }
     }

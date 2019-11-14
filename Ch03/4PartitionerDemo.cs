@@ -24,7 +24,7 @@ namespace Ch03
             {
                 var startRange = range.Item1;
                 var endRange = range.Item2;
-                Console.WriteLine("Range execution finished on task {0} with range {1}-{2}", Task.CurrentId,startRange,endRange);
+                Console.WriteLine($"Range execution finished on task {Task.CurrentId} with range {startRange}-{endRange}");
             });
         }
     }

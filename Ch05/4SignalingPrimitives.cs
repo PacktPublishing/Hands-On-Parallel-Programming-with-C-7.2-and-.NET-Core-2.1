@@ -46,7 +46,7 @@ namespace Ch05
 
             WaitHandle.WaitAny(waitHandles);
 
-            Console.WriteLine("Item found at index {0} and faster algo is {1}", findIndex, winnerAlgo);
+            Console.WriteLine($"Item found at index {findIndex} and faster algo is {winnerAlgo}");
         }
 
         private static void BinarySearch(object state)
@@ -109,9 +109,9 @@ namespace Ch05
             {
                 Parallel.For(0, 5, (j) =>
                 {
-                    Console.WriteLine("Task with id {0} waiting for network to be up", Task.CurrentId);
+                    Console.WriteLine($"Task with id {Task.CurrentId} waiting for network to be up");
                     manualResetEvent.WaitOne();
-                    Console.WriteLine("Task with id {0} making service call", Task.CurrentId);
+                    Console.WriteLine($"Task with id {Task.CurrentId} making service call");
                     DummyServiceCall();
                 });
                 Thread.Sleep(3000);
@@ -136,9 +136,9 @@ namespace Ch05
             int sum = 0;
             Parallel.For(1, 10, (i) =>
             {
-                Console.WriteLine("Task with id {0} waiting for signal to enter", Task.CurrentId);
+                Console.WriteLine($"Task with id {Task.CurrentId} waiting for signal to enter");
                 autoResetEvent.WaitOne();
-                Console.WriteLine("Task with id {0} received signal to enter", Task.CurrentId);
+                Console.WriteLine($"Task with id {Task.CurrentId} received signal to enter");
                 sum += i;
             });
         }
@@ -187,7 +187,7 @@ namespace Ch05
             });
             childThread.Start();
             childThread.Join();
-            Console.WriteLine("Result is {0}", result);
+            Console.WriteLine($"Result is {result}");
         }
     }
 }

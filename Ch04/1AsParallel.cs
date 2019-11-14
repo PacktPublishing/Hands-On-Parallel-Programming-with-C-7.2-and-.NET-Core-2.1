@@ -14,16 +14,16 @@ namespace Ch04
             var range = Enumerable.Range(1, 100000);
             //Here is sequential version
             var resultList = range.Where(i => i % 3 == 0).ToList();
-            Console.WriteLine("Sequential: Total items are {0}", resultList.Count);
+            Console.WriteLine($"Sequential: Total items are {resultList.Count}" );
 
             //Here is Parallel Version using .AsParallel method
             resultList = range.AsParallel().Where(i => i % 3 == 0).ToList();
-            Console.WriteLine("Parallel: Total items are {0}", resultList.Count);
+            Console.WriteLine($"Parallel: Total items are {resultList.Count}" );
             resultList = (from i in range.AsParallel()
                           where i % 3 == 0
                           select i).ToList();
             
-            Console.WriteLine("Parallel: Total items are {0}", resultList.Count);
+            Console.WriteLine($"Parallel: Total items are {resultList.Count}");
 
             Sequential();
 
@@ -37,7 +37,7 @@ namespace Ch04
             var successResultList = range.AsParallel().Select(i => i % 3 == 0).ToList();
             var failedRequests = range.AsParallel().AsOrdered().Where((r, index) =>
             {
-                Console.WriteLine("Task id is {0}", Task.CurrentId);
+                Console.WriteLine($"Task id is {Task.CurrentId}" );
                 return !successResultList[index];
             }
             ).ToList();
